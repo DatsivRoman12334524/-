@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ієрархія</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #003366; /* Темно-синій */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #003366; /* Синій колір для заголовків */
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            font-size: 1.2em;
+            line-height: 1.6;
+            list-style: inside;
+        }
+
+        footer {
+            background-color: #003366; /* Темно-синій */
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        /* Плавні переходи для кольорів */
+        header h1, footer p {
+            transition: color 0.3s ease;
+        }
+
+        /* Анімація при завантаженні сторінки */
+        .container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Стилізація для анімації */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ієрархія Міністерства Оборони</h1>
+    </header>
+
+    <div class="container">
+        <h2>Структура Міністерства</h2>
+        <ul>
+            <li>Міністр Оборони: Роман Дацик</li>
+            <li>Перший заступник Міністра Оборони</li>
+            <li>Заступник Міністра Оборони</li>
+            <li>Генерал Армії: Олександр Навроцький</li>
+        </ul>
+        <h3>Підпорядкованість:</h3>
+        <p>Міністр Оборони (Роман Дацик) керує всіма вищезгаданими посадами.</p>
+        <p>Перший заступник Міністра Оборони і Заступник Міністра Оборони підпорядковуються Міністру Оборони.</p>
+        <p>Генерал Армії Олександр Навроцький підпорядковується безпосередньо Міністру Оборони.</p>
+    </div>
+
+    <footer>
+        <p>Міністерсво Оборони Західної України &copy; 2025</p>
+    </footer>
+
+</body>
+</html>

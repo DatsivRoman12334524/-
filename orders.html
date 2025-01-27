@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Накази Міністра Оборони</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5a7beb;
+            margin: 0;
+            padding: 20px;
+            color: #003366;
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .add-doc-btn {
+            background-color: #0052cc;
+            color: #ffffff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-doc-btn:hover {
+            background-color: #003f9c;
+        }
+
+        .doc-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            background-color: #eeeeee;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        iframe {
+            border-radius: 8px;
+            width: 100%;
+            height: 400px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #003366;
+            margin-top: 30px;
+        }
+
+        .delete-btn {
+            background-color: #ff3b3b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #e60000;
+        }
+
+        .input-code {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-code input {
+            padding: 8px 15px;
+            font-size: 16px;
+            border: 1px solid #003366;
+            border-radius: 5px;
+        }
+
+        .input-code button {
+            padding: 8px 15px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .input-code button:hover {
+            background-color: #002a4a;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container input, .form-container button {
+            padding: 8px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .form-container input[type="text"], .form-container input[type="date"], .form-container input[type="url"] {
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        .form-container button {
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Останні накази</h2>
+        
+        <div class="form-container">
+            <h3>Додати новий наказ</h3>
+            <label for="date">Дата:</label>
+            <input type="date" id="orderDate" required><br>
+
+            <label for="name">Назва наказу:</label>
+            <input type="text" id="orderName" required><br>
+
+            <label for="link">Посилання на наказ (PDF):</label>
+            <input type="url" id="orderLink" required><br>
+
+            <button id="addOrderBtn">Додати наказ</button>
+        </div>
+
+        <table id="ordersTable">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Наказ</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Дані для наказів будуть вставлятись через JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Міністерсво Оборони Західної України</p>
+    </div>
+
+    <script>
+        // Функція для завантаження наказів із локального сховища
+        function loadOrders() {
+            const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+            const tableBody = document.querySelector('#ordersTable tbody');
+            tableBody.innerHTML = '';
+
+            savedOrders.forEach((order, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.date}</td>
+                    <td>${order.name}</td>
+                    <td>
+                        <a href="${order.link}" target="_blank">Переглянути</a>
+                        <button class="delete-btn" onclick="deleteOrder(${index})">Видалити</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Функція для видалення наказу з локального сховища
+        function deleteOrder(index) {
+            const code = prompt('Введіть код для видалення наказу:');
+            if (code === 'ОБОРОНА') {
+                let savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+                savedOrders.splice(index, 1); // Видалення наказу з масиву
+                localStorage.setItem('orders', JSON.stringify(savedOrders)); // Зберігаємо нові дані в localStorage
+                loadOrders(); // Перезавантажуємо таблицю
+                alert('Наказ видалено!');
+            } else {
+                alert('Невірний код. Наказ не було видалено.');
+            }
+        }
+
+        // Додавання нового наказу в локальне сховище
+        document.getElementById('addOrderBtn').addEventListener('click', () => {
+            const date = document.getElementById('orderDate').value;
+            const name = document.getElementById('orderName').value;
+            const link = document.getElementById('orderLink').value;
+            
+            if (date && name && link) {
+                let savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+                savedOrders.push({ date, name, link });
+                localStorage.setItem('orders', JSON.stringify(savedOrders)); // Зберігаємо в localStorage
+                loadOrders(); // Перезавантажуємо таблицю з новим наказом
+            } else {
+                alert('Будь ласка, заповніть всі поля!');
+            }
+        });
+
+        // Завантаження наказів при завантаженні сторінки
+        window.onload = loadOrders;
+    </script>
+
+<script>
+    // Function for loading orders from local storage
+    function loadOrders() {
+        const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        const tableBody = document.querySelector('#ordersTable tbody');
+        tableBody.innerHTML = '';
+        savedOrders.forEach((order, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${order.date}</td>
+                <td>${order.name}</td>
+                <td>
+                    <a href="${order.link}" target="_blank">Переглянути</a>
+                    <button class="delete-btn" onclick="deleteOrder(${index})">Видалити</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+    // Handle other functionalities as you specified earlier
+    window.onload = loadOrders;
+</script>
+
+</body>
+</html>

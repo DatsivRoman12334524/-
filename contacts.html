@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #15212e;
+            margin: 0;
+            padding: 0;
+            color: #818080;
+        }
+
+        header {
+            background-color: #003366;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #060236;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .profile-card {
+            position: relative;
+            margin: 15px;
+            width: 180px;
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            max-height: 0;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            border: 1px solid #cfcfcf;
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+
+        .contact-info.open {
+            max-height: 200px;
+            padding: 10px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        footer {
+            background-color: #003366;
+            color: #ffffff;
+            text-align: center;
+            padding: 0.02px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        function toggleInfo(id) {
+            const info = document.getElementById(id);
+            info.classList.toggle('open');
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Контакти Міністерства Оборони</h1>
+</header>
+
+<div class="container">
+    <h2>Контактна інформація</h2>
+    <div class="profile">
+        <div class="profile-card" onclick="toggleInfo('info-minister')">
+            <img src="https://ukraine-gta.com.ua/images/game/skins/300x280/37.webp" alt="Міністр Оборони">
+            <h3>Міністр Оборони</h3>
+        </div>
+        <div class="profile-card" onclick="toggleInfo('info-deputy')">
+            <img src="https://ukraine-gta.com.ua/images/game/skins/300x280/50.webp" alt="Заступник Міністра">
+            <h3>Заступник Міністра</h3>
+        </div>
+        <div class="profile-card" onclick="toggleInfo('info-secretary')">
+            <img src="https://ukraine-gta.com.ua/images/game/skins/300x280/255.webp" alt="Секретар">
+            <h3>Секретар</h3>
+        </div>
+    </div>
+
+    <div id="info-minister" class="contact-info">
+        <h4>Міністр Оборони</h4>
+         </p>Роман Дацик<p>
+        <p><strong>Telegram</strong> <a href="https://t.me/dat_roman" target="_blank">@dat_roman</a>
+        <p><strong>Discord</strong> datsiv1131</p>
+    </div>
+
+    <div id="info-deputy" class="contact-info">
+        <h4>Заступник Міністра</h4>
+         </p>Вакантно<p>
+        <p><strong>Telegram</strong> <a href="----" target="_blank">невідомо</a>
+            <p><strong>Discord</strong> невідомо</p>
+    </div>
+
+    <div id="info-secretary" class="contact-info">
+        <h4>Секретар</h4>
+         </p>Вакантно<p>
+        <p><strong>Telegram</strong> <a href="----" target="_blank">невідомо</a>
+            <p><strong>Discord</strong> невідомо</p>
+    </div>
+</div>
+
+<footer>
+    <p>Міністерство Оборони України &copy; 2025</p>
+</footer>
+
+</body>
+</html>
